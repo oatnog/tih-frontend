@@ -19,7 +19,7 @@
 import BarChart from "@/components/BarChart";
 import axios from "axios";
 
-const RESTService = "https://165.232.147.1:5000/"
+const RESTService = "https://tih-reports.onrender.com"
 export default {
   name: 'ChartContainer',
   components: {BarChart},
