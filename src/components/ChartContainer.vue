@@ -10,7 +10,6 @@
         <option value="" selected disabled>Choose</option>
         <option v-for="date in dates" :key="date">{{ date }}</option>
       </select>
-      <p><span>Selected Date: {{ selectedDate }}</span></p>
     </div>
   </div>
 </template>
@@ -19,7 +18,7 @@
 import BarChart from "@/components/BarChart";
 import axios from "axios";
 
-const RESTService = "https://tih-reports.onrender.com"
+const RESTService = "https://tih-reports.onrender.com/"
 export default {
   name: 'ChartContainer',
   components: {BarChart},
