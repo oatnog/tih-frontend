@@ -18,7 +18,9 @@
 import BarChart from "@/components/BarChart";
 import axios from "axios";
 
-const RESTService = "https://tih.pythonanywhere.com/"
+// const RESTService = "https://tih.pythonanywhere.com/";
+const RESTService = "https://tih-reports.onrender.com/";
+
 export default {
   name: 'ChartContainer',
   components: {BarChart},
@@ -38,8 +40,8 @@ export default {
       let allDates = res.data.map(date => new Date(date));
       allDates.sort().reverse();
       // const newest = new Date(Math.max(...allDates));
-      this.selectedDate = allDates[0].toISOString().substring(0,10);
-      this.dates = allDates.map(date => date.toISOString().substring(0,10));
+      this.selectedDate = allDates[0].toISOString().substring(0, 10);
+      this.dates = allDates.map(date => date.toISOString().substring(0, 10));
       console.log(this.selectedDate);
     },
     initChart() {
@@ -62,16 +64,16 @@ export default {
         const res = await axios(RESTService + 'status/' + this.selectedDate);
 
         this.chartdata = {
-            labels: res.data.filings.map(filing => {
-              return filing.status;
+          labels: res.data.filings.map(filing => {
+            return filing.status;
+          }),
+          datasets: [{
+            label: "Tax Returns Status as of " + this.selectedDate,
+            backgroundColor: "#dc2b2b",
+            data: res.data.filings.map(filing => {
+              return filing.total;
             }),
-            datasets: [{
-              label: "Tax Returns Status as of " + this.selectedDate,
-              backgroundColor: "#dc2b2b",
-              data: res.data.filings.map(filing => {
-                return filing.total;
-              }),
-            },],
+          },],
         };
         this.loaded = true;
       } catch (e) {
