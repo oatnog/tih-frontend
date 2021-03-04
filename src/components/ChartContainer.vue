@@ -18,7 +18,7 @@
 import BarChart from "@/components/BarChart";
 import axios from "axios";
 
-const RESTService = "https://tih-reports:10000/"
+const RESTService = "https://tih.pythonanywhere.com/"
 export default {
   name: 'ChartContainer',
   components: {BarChart},
