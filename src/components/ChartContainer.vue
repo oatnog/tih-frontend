@@ -23,11 +23,14 @@
         :max="dates.length - 1"
       >
       <button
-        class="btn btn-primary"
+        class="btn btn-link"
         type="button"
         @click="cycleCharts()"
       >
-        <i class="bi bi-play-circle">Play</i>
+        <i
+            v-bind:class="[playing ? 'bi bi-pause-circle' : 'bi bi-play-circle']"
+            style="font-size-adjust: 1"
+        />
       </button>
       <br>
       <span> {{ selectedDate }}</span>
@@ -40,11 +43,10 @@
   import axios from 'axios'
 
   let REST_API = ''
-  console.log(process.env.VUE_APP_REST_API)
   if (process.env.VUE_APP_REST_API) {
     REST_API = process.env.VUE_APP_REST_API
   } else {
-    REST_API = 'https://localhost:5000/'
+    REST_API = 'https://localhost:5000/' // default to referring to running API locally
   }
 
   const RATE_CYCLE = 2000
@@ -53,10 +55,11 @@
     name: 'ChartContainer',
     components: { BarChart },
     data: () => ({
-      loaded: false,
+      loaded: false, // has the data loaded, so we can render it?
+      playing: false, // has the user pressed the Play button?
       selectedDateIndex: 0,
       chartdata: null,
-      dates: null,
+      dates: null, // all available dates for which server has report data
     }),
     computed: {
       selectedDate () {
@@ -72,13 +75,13 @@
     },
     methods: {
       cycleCharts () {
-        console.log(this.timer)
         if (this.timer) {
           clearInterval(this.timer)
           this.timer = null // Is there a better way to toggle this?
+          this.playing = false
         } else {
+          this.playing = true
           this.play()
-          // this.style.setProperty('i')
           this.timer = setInterval(this.play, RATE_CYCLE)
         }
       },
@@ -112,7 +115,6 @@
       },
       async updateChart (restAPI, date) {
         try {
-          console.log(date)
           const res = await axios(`${restAPI}status/${date}`)
 
           this.chartdata = {
