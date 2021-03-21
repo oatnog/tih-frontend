@@ -39,9 +39,14 @@
   import BarChart from '@/components/BarChart'
   import axios from 'axios'
 
-  const REST_API = 'https://tih.pythonanywhere.com/'
-  // const RESTService = "https://tih-reports.onrender.com/";
-  // const RESTService = 'https://localhost:5000/'
+  let REST_API = ''
+  console.log(process.env.VUE_APP_REST_API)
+  if (process.env.VUE_APP_REST_API) {
+    REST_API = process.env.VUE_APP_REST_API
+  } else {
+    REST_API = 'https://localhost:5000/'
+  }
+
   const RATE_CYCLE = 2000
 
   export default {
