@@ -28,8 +28,8 @@
         @click="cycleCharts()"
       >
         <i
-            v-bind:class="[playing ? 'bi bi-pause-circle' : 'bi bi-play-circle']"
-            style="font-size-adjust: 1"
+          :class="[playing ? 'bi bi-pause-circle' : 'bi bi-play-circle']"
+          style="font-size-adjust: 1"
         />
       </button>
       <br>
