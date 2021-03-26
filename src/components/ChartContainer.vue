@@ -42,12 +42,7 @@
   import BarChart from '@/components/BarChart'
   import axios from 'axios'
 
-  let REST_API = ''
-  if (process.env.VUE_APP_REST_API) {
-    REST_API = process.env.VUE_APP_REST_API
-  } else {
-    REST_API = 'https://localhost:5000/' // default to referring to running API locally
-  }
+  const REST_API = process.env.VUE_APP_REST_API || 'https://localhost:5000/'  // default to running API locally
 
   const RATE_CYCLE = 2000
 
