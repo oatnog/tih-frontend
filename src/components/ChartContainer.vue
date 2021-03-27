@@ -81,7 +81,7 @@
         }
       },
       play () {
-        if (this.selectedDateIndex === this.dates.length - 1) {
+        if (this.selectedDateIndex >= this.dates.length - 1) {
           this.selectedDateIndex = 0 // back to start
         } else {
           this.selectedDateIndex++
